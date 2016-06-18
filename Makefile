@@ -2,6 +2,7 @@
 
 LDFLAGS=-L.
 LIBS=-lpphash
+CFLAGS+=-std=c99 -D_GNU_SOURCE
 
 all: libpphash.a 
 
@@ -14,10 +15,10 @@ libpphash.a: pphash.o
 test: pphash_test
 	./pphash_test
 
-pphash_test: pphash-tests.o
-	$(CC) $(CFLAGS) $(LDFLAGS) $(LIBS) $< -o $@
+pphash_test: pphash-tests.o libpphash.a
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) $(LIBS)
 
-pphash-tests.o: pphash-tests.c libpphash.a
+#pphash-tests.o: pphash-tests.c libpphash.a
 
 clean:
 	rm -rf *.o *.a pphash_test
