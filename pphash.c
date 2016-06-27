@@ -10,8 +10,12 @@
 // - support for generic value obj
 // - tests
 //
+
+#ifdef TARGET_OS_MAC
 //should be declared in string.h but seems not to be
 extern char *strdup(const char *);
+
+#endif
 
 
 hashtable_t *ht_create( int size, int(*free_value)(void *) ) {
